@@ -38,10 +38,5 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner runner(){
-		return args -> {
-			System.out.println(service.getMessage());
-		};
-	}
+
 }

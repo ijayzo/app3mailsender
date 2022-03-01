@@ -1,7 +1,30 @@
 spring:
   application:
-    name: DemoApplicationAPI;
+    name: MailSenderAPI;
+#  datasource:
+#    username: ${DB_USERNAME:postgres}
+#    password: ${DB_PASSWORD:admin}
+#    url: jdbc:postgresql://${DB_HOST:35.188.29.161}:${DB_PORT:5432}/${DB_NAME:postgres}
+#    driver-class-name: org.postgresql.Driver
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pogidevs@gmail.com
+    password: yqyvnfxnlalashhg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    smtp:
+      debug: true
 
-services:
-  message-service:
-    message: "Hello, World!!"
+server:
+  port: 8070
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics,prometheus"

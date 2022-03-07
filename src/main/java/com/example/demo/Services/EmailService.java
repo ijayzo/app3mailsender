@@ -20,6 +20,11 @@ public class EmailService {
     public EmailService(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
+
+    /**
+     * Method to send email using the Mail POJO
+     * @param mail - Simple mail contents POJO
+     */
     public void sendEmail(Mail mail) {
         MimeMessage mimeMessage = emailSender.createMimeMessage();
 

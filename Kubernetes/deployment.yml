@@ -46,8 +46,8 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app:email-deployment
-    endpoints:
+      app: email-deployment
+  endpoints:
       - port: http-app3
         path: "/actuator/prometheus"
 

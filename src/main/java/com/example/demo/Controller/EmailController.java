@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Model.CancelMailTemplate;
 import com.example.demo.Model.Mail;
+import com.example.demo.Model.MailSenderCreatePackage;
 import com.example.demo.Services.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ public class EmailController {
     EmailController(EmailService sendEmail) {
         this.emailService = sendEmail;
     }
+
+
 
     /**
      * API to send the cancellation email using the Template passed as parameter
@@ -86,6 +89,47 @@ public class EmailController {
 
         emailService.sendEmail(mail);
 
+    }
+
+    /**
+     * API to send the cancellation email using the Template passed as parameter
+     * @param mailSenderCreatePackage - template containing the cancellation details so that the email is personalized
+     * @return success message
+     * @throws AddressException
+     * @throws MessagingException
+     * @throws IOException
+     */
+    @PostMapping("/createdPackage")
+    public ResponseEntity getFromCreatingPackage(@RequestBody MailSenderCreatePackage mailSenderCreatePackage) throws AddressException, MessagingException, IOException{
+
+        Mail mail = new Mail();
+        mail.setEmailFrom("pogidevs@gmail.com");
+        mail.setEmailTo(mailSenderCreatePackage.getEmail());
+        mail.setEmailSubject("Your Package has been Booked ");
+        mail.setEmailContent("Dear Employee,\n\nYour  package has been successfully created. Please Check the Website Portal for more information\n\nThanks\nDevOps SRE Team4");
+
+        emailService.sendEmail(mail);
+        logger.info("Package Cancellation Email Sent to: " + mailSenderCreatePackage.getEmail());
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Email sent successfully to " + mailSenderCreatePackage.getEmail());
+    }
+
+
+    @PostMapping("/createdEmployee")
+    public ResponseEntity getFromCreatingEmployee(@RequestBody MailSenderCreatePackage mailSenderCreatePackage) throws AddressException, MessagingException, IOException{
+
+        Mail mail = new Mail();
+        mail.setEmailFrom("pogidevs@gmail.com");
+        mail.setEmailTo(mailSenderCreatePackage.getEmail());
+        mail.setEmailSubject("Welcome To Vacation Portal ");
+        mail.setEmailContent("Dear " + mailSenderCreatePackage.getEmail() +      " ,\n\nYour  account has been successfully created. Please Check the Website Portal for more information\n\nThanks\nDevOps SRE Team4");
+
+        emailService.sendEmail(mail);
+        logger.info("Package Cancellation Email Sent to: " + mailSenderCreatePackage.getEmail());
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("Email sent successfully to " + mailSenderCreatePackage.getEmail());
     }
 
 }

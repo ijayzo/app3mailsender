@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+
 
 /** This restcontroller exposes the API for email sending
  *
@@ -101,7 +100,7 @@ public class EmailController {
      */
     @PostMapping("/createdPackage")
     public ResponseEntity getFromCreatingPackage(@RequestBody MailSenderCreatePackage mailSenderCreatePackage) throws AddressException, MessagingException, IOException{
-
+        logger.info("Creating mail to be send " + mailSenderCreatePackage.getEmail());
         Mail mail = new Mail();
         mail.setEmailFrom("pogidevs@gmail.com");
         mail.setEmailTo(mailSenderCreatePackage.getEmail());
@@ -109,7 +108,7 @@ public class EmailController {
         mail.setEmailContent("Dear Employee,\n\nYour  package has been successfully created. Please Check the Website Portal for more information\n\nThanks\nDevOps SRE Team4");
 
         emailService.sendEmail(mail);
-        logger.info("Package Cancellation Email Sent to: " + mailSenderCreatePackage.getEmail());
+        logger.info("Email Sent to: " + mailSenderCreatePackage.getEmail());
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Email sent successfully to " + mailSenderCreatePackage.getEmail());
@@ -118,7 +117,7 @@ public class EmailController {
 
     @PostMapping("/createdEmployee")
     public ResponseEntity getFromCreatingEmployee(@RequestBody MailSenderCreatePackage mailSenderCreatePackage) throws AddressException, MessagingException, IOException{
-
+        logger.info("Sending Email to the New Employee");
         Mail mail = new Mail();
         mail.setEmailFrom("pogidevs@gmail.com");
         mail.setEmailTo(mailSenderCreatePackage.getEmail());
@@ -126,7 +125,7 @@ public class EmailController {
         mail.setEmailContent("Dear " + mailSenderCreatePackage.getEmail() +      " ,\n\nYour  account has been successfully created. Please Check the Website Portal for more information\n\nThanks\nDevOps SRE Team4");
 
         emailService.sendEmail(mail);
-        logger.info("Package Cancellation Email Sent to: " + mailSenderCreatePackage.getEmail());
+        logger.info("Welcome  Email Sent to: " + mailSenderCreatePackage.getEmail());
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Email sent successfully to " + mailSenderCreatePackage.getEmail());

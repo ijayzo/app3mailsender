@@ -123,7 +123,6 @@ public class EmailController {
         mail.setEmailTo(mailSenderCreatePackage.getEmail());
         mail.setEmailSubject("Welcome To Vacation Portal ");
         mail.setEmailContent("Dear " + mailSenderCreatePackage.getEmail() +      " ,\n\nYour  account has been successfully created. Please Check the Website Portal for more information\n\nThanks\nDevOps SRE Team4");
-
         emailService.sendEmail(mail);
         logger.info("Welcome  Email Sent to: " + mailSenderCreatePackage.getEmail());
 
